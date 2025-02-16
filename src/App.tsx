@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import Movie from './models/movie';
-import NavBar from './components/nav-bar';
+import NavBar from './components/nav/nav-bar';
 import Main from './components/main';
 
 const tempMovieData: Movie[] = [
