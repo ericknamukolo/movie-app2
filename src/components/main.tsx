@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import Movie from '../models/movie';
+import ListBox from './box/list-box';
 
 const average = (arr: number[]) =>
   arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
 
 function Main({ watched, movies }: { watched: Movie[]; movies: Movie[] }) {
-  const [isOpen1, setIsOpen1] = useState(true);
   const [isOpen2, setIsOpen2] = useState(true);
 
   const avgImdbRating = average(watched.map((movie) => movie.imdbRating!));
@@ -13,31 +13,7 @@ function Main({ watched, movies }: { watched: Movie[]; movies: Movie[] }) {
   const avgRuntime = average(watched.map((movie) => movie.runtime!));
   return (
     <main className='main'>
-      <div className='box'>
-        <button
-          className='btn-toggle'
-          onClick={() => setIsOpen1((open) => !open)}
-        >
-          {isOpen1 ? '–' : '+'}
-        </button>
-        {isOpen1 && (
-          <ul className='list'>
-            {movies?.map((movie) => (
-              <li key={movie.imdbID}>
-                <img src={movie.Poster} alt={`${movie.Title} poster`} />
-                <h3>{movie.Title}</h3>
-                <div>
-                  <p>
-                    <span>🗓</span>
-                    <span>{movie.Year}</span>
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
-
+      <ListBox movies={movies} />
       <div className='box'>
         <button
           className='btn-toggle'
