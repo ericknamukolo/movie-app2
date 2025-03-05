@@ -5,10 +5,9 @@ import Main from './components/main';
 import Search from './components/nav/search';
 import NamResults from './components/nav/num-results';
 import Logo from './components/nav/logo';
-import WatchedList from './components/movie/watched/watched-list';
-import WatchedSummary from './components/movie/watched/watched-summary';
 import ListBox from './components/movie/movies/list-box';
 import WatchedBox from './components/movie/watched/watched-box';
+import MovieList from './components/movie/movies/movie-list';
 
 const tempMovieData: Movie[] = [
   {
@@ -69,7 +68,9 @@ export default function App() {
         <NamResults numResults={movies.length} />
       </NavBar>
       <Main>
-        <ListBox movies={movies} />
+        <ListBox>
+          <MovieList movies={movies} />
+        </ListBox>
         <WatchedBox watched={watched} />
       </Main>
     </>
