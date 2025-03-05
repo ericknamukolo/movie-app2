@@ -1,4 +1,4 @@
-import Movie from '../../models/movie';
+import Movie from '../../../models/movie';
 
 export default function MovieCard({ movie }: { movie: Movie }) {
   return (

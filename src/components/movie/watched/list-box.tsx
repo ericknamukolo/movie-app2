@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import Movie from '../../models/movie';
+import Movie from '../../../models/movie';
 import MovieList from './movie-list';
 
 export default function ListBox({ movies }: { movies: Movie[] }) {

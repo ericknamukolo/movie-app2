@@ -1,16 +1,7 @@
-import Movie from '../../models/movie';
-import Search from './search';
-import Logo from './logo';
-import NamResults from './num-results';
+import React, { ReactNode } from 'react';
 
-function NavBar({ movies }: { movies: Movie[] }) {
-  return (
-    <nav className='nav-bar'>
-      <Logo />
-      <Search />
-      <NamResults numResults={movies.length} />
-    </nav>
-  );
+function NavBar({ children }: { children: ReactNode }) {
+  return <nav className='nav-bar'>{children}</nav>;
 }
 
 export default NavBar;
