@@ -5,6 +5,9 @@ import Main from './components/main';
 import Search from './components/nav/search';
 import NamResults from './components/nav/num-results';
 import Logo from './components/nav/logo';
+import WatchedList from './components/movie/summary/watched-list';
+import WatchedSummary from './components/movie/summary/watched-summary';
+import ListBox from './components/movie/watched/list-box';
 
 const tempMovieData: Movie[] = [
   {
@@ -56,6 +59,7 @@ const tempWatchedData: Movie[] = [
 export default function App() {
   const [movies, setMovies] = useState(tempMovieData);
   const [watched, setWatched] = useState(tempWatchedData);
+  const [isOpen2, setIsOpen2] = useState(true);
 
   return (
     <>
@@ -64,7 +68,24 @@ export default function App() {
         <Search />
         <NamResults numResults={movies.length} />
       </NavBar>
-      <Main watched={watched} movies={movies} />
+      <Main>
+        <ListBox movies={movies} />
+        <div className='box'>
+          <button
+            className='btn-toggle'
+            onClick={() => setIsOpen2((open) => !open)}
+          >
+            {isOpen2 ? '–' : '+'}
+          </button>
+          {isOpen2 && (
+            <>
+              <WatchedSummary watched={watched} />
+
+              <WatchedList watched={watched} />
+            </>
+          )}
+        </div>
+      </Main>
     </>
   );
 }
