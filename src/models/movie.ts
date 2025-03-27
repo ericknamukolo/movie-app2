@@ -3,9 +3,15 @@ type Movie = {
   Title: string;
   Year: string;
   Poster: string;
-  runtime?: number | null;
-  imdbRating?: number | null;
-  userRating?: number | null;
+  Runtime?: string;
+  runtime?: number;
+  imdbRating?: number;
+  userRating?: number;
+  Plot?: string;
+  Released?: string;
+  Actors?: string;
+  Director?: string;
+  Genre?: string;
 };
 
 export default Movie;
