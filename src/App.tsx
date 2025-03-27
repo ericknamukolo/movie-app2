@@ -25,6 +25,7 @@ export default function App() {
         setMovies(val);
         console.log(val.length);
       })
+      .catch((e) => alert(e))
       .finally(() => setLoading(false));
   }, []);
 

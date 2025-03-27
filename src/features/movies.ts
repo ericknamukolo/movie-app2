@@ -12,9 +12,8 @@ async function searchMovie(query: string): Promise<Movie[]> {
 
     return movies;
   } catch (e) {
-    console.log(e);
+    throw e;
   }
-  return [];
 }
 
 export default searchMovie;
