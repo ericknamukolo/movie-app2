@@ -10,6 +10,7 @@ import MovieList from './components/movie/movies/movie-list';
 import Box from './components/movie/movies/box';
 import WatchedSummary from './components/movie/watched/watched-summary';
 import WatchedList from './components/movie/watched/watched-list';
+import StarRating from './components/movie/star-rating';
 
 const tempMovieData: Movie[] = [
   {
@@ -77,6 +78,7 @@ export default function App() {
           <WatchedSummary watched={watched} />
           <WatchedList watched={watched} />
         </Box>
+        <StarRating />
       </Main>
     </>
   );
