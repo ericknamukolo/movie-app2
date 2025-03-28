@@ -18,22 +18,26 @@ export default function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [watched, setWatched] = useState<Movie[]>([]);
+  const [query, setQuery] = useState('');
 
   useEffect(() => {
-    searchMovie('interstellar')
+    if (query.length < 3) {
+      setMovies([]);
+      return;
+    }
+    searchMovie(query)
       .then((val) => {
         setMovies(val);
-        console.log(val.length);
       })
       .catch((e) => alert(e))
       .finally(() => setLoading(false));
-  }, []);
+  }, [query]);
 
   return (
     <>
       <NavBar>
         <Logo />
-        <Search />
+        <Search query={query} setQuery={setQuery} />
         <NamResults numResults={movies.length} />
       </NavBar>
 

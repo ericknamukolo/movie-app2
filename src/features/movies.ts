@@ -8,6 +8,10 @@ async function searchMovie(query: string): Promise<Movie[]> {
       `http://www.omdbapi.com/?s=${query}&apiKey=${APIKEY}`
     );
     const data = await res.json();
+    console.log(data);
+    if (data.Response === 'False') {
+      throw new Error(data.Error);
+    }
     const movies: Movie[] = data.Search;
 
     return movies;
