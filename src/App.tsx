@@ -22,7 +22,6 @@ export default function App() {
 
   useEffect(() => {
     if (query.length < 3) {
-      setMovies([]);
       return;
     }
     searchMovie(query)

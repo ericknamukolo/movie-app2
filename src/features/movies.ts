@@ -10,7 +10,7 @@ async function searchMovie(query: string): Promise<Movie[]> {
     const data = await res.json();
     console.log(data);
     if (data.Response === 'False') {
-      throw new Error(data.Error);
+      return [];
     }
     const movies: Movie[] = data.Search;
 
