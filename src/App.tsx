@@ -13,12 +13,14 @@ import WatchedList from './components/movie/watched/watched-list';
 import StarRating from './components/movie/star-rating';
 import searchMovie from './features/movies';
 import Loader from './components/loader';
+import SelectedMovie from './components/movie/selected-movie';
 
 export default function App() {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [watched, setWatched] = useState<Movie[]>([]);
   const [query, setQuery] = useState('');
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
   useEffect(() => {
     if (query.length < 3) {
@@ -41,10 +43,25 @@ export default function App() {
       </NavBar>
 
       <Main>
-        <Box>{loading ? <Loader /> : <MovieList movies={movies} />}</Box>
         <Box>
-          <WatchedSummary watched={watched} />
-          <WatchedList watched={watched} />
+          {loading ? (
+            <Loader />
+          ) : (
+            <MovieList
+              movies={movies}
+              onSelectMovie={(id) => setSelectedId(id)}
+            />
+          )}
+        </Box>
+        <Box>
+          {selectedId ? (
+            <SelectedMovie selectedId={selectedId} />
+          ) : (
+            <>
+              <WatchedSummary watched={watched} />
+              <WatchedList watched={watched} />
+            </>
+          )}
         </Box>
         {/* <StarRating /> */}
       </Main>
