@@ -13,7 +13,7 @@ const starContainerStyle = {
 const textStyle = {
   lineHeight: '1',
   margin: '0',
-  fontSize: '32px',
+  fontSize: '20px',
   color: '#fcc419',
 };
 
@@ -21,16 +21,19 @@ export default function StarRating({
   maxRating = 10,
   size = 48,
   color = '#fcc419',
+  onSetRating,
 }: {
   maxRating?: number;
   size?: number;
   color?: string;
+  onSetRating: (rate: number) => void;
 }) {
   const [rating, setRating] = useState<number>(0);
   const [tempRating, setTempRating] = useState<number | null>(null);
 
   function rate(rating: number) {
     setRating(rating);
+    onSetRating(rating);
   }
   return (
     <div style={containerStyle}>
@@ -52,8 +55,8 @@ export default function StarRating({
 }
 
 const starStyle = {
-  width: '48px',
-  height: '48px',
+  width: '24px',
+  height: '24px',
   display: 'block',
   cursor: 'pointer',
   border: 'none',

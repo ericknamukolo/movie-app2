@@ -9,7 +9,7 @@ export default function MovieList({
   onSelectMovie: (id: string) => void;
 }) {
   return (
-    <ul className='list'>
+    <ul className='list list-movies'>
       {movies?.map((movie) => (
         <MovieCard
           movie={movie}

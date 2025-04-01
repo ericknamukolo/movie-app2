@@ -10,7 +10,7 @@ import MovieList from './components/movie/movies/movie-list';
 import Box from './components/movie/movies/box';
 import WatchedSummary from './components/movie/watched/watched-summary';
 import WatchedList from './components/movie/watched/watched-list';
-import StarRating from './components/movie/star-rating';
+
 import searchMovie from './features/movies';
 import Loader from './components/loader';
 import SelectedMovie from './components/movie/selected-movie';
@@ -34,6 +34,17 @@ export default function App() {
       .finally(() => setLoading(false));
   }, [query]);
 
+  function addWatchedMovie(movie: Movie) {
+    setWatched((watched) => [...watched, movie]);
+    setSelectedId(null);
+  }
+
+  function removeMovie(id: string) {
+    setWatched((watched) => {
+      var newMovies: Movie[] = watched.filter((mov) => mov.imdbID !== id);
+      return newMovies;
+    });
+  }
   return (
     <>
       <NavBar>
@@ -49,13 +60,21 @@ export default function App() {
           ) : (
             <MovieList
               movies={movies}
-              onSelectMovie={(id) => setSelectedId(id)}
+              onSelectMovie={(id) =>
+                setSelectedId(selectedId === id ? null : id)
+              }
             />
           )}
         </Box>
         <Box>
           {selectedId ? (
-            <SelectedMovie selectedId={selectedId} />
+            <SelectedMovie
+              selectedId={selectedId}
+              onClose={() => setSelectedId(null)}
+              onAddWatched={addWatchedMovie}
+              onRemove={removeMovie}
+              isWatched={watched.some((movie) => movie.imdbID === selectedId)}
+            />
           ) : (
             <>
               <WatchedSummary watched={watched} />
@@ -63,7 +82,6 @@ export default function App() {
             </>
           )}
         </Box>
-        {/* <StarRating /> */}
       </Main>
     </>
   );
