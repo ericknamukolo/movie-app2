@@ -78,7 +78,7 @@ export default function App() {
           ) : (
             <>
               <WatchedSummary watched={watched} />
-              <WatchedList watched={watched} />
+              <WatchedList watched={watched} deleteWatched={removeMovie} />
             </>
           )}
         </Box>

@@ -25,10 +25,15 @@ export default function SelectedMovie({
     setLoading(true);
     getMovieDetails(selectedId)
       .then((val) => {
+        document.title = `Movie | ${val?.Title}`;
         setMovie(val);
       })
       .catch((e) => alert(e))
       .finally(() => setLoading(false));
+
+    return () => {
+      document.title = 'Movie App';
+    };
   }, [selectedId]);
 
   return (

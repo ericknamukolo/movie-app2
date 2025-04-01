@@ -1,6 +1,12 @@
 import Movie from '../../../models/movie';
 
-export default function WatchedMovieCard({ movie }: { movie: Movie }) {
+export default function WatchedMovieCard({
+  movie,
+  deleteWatched,
+}: {
+  movie: Movie;
+  deleteWatched: (id: string) => void;
+}) {
   return (
     <li key={movie.imdbID}>
       <img src={movie.Poster} alt={`${movie.Title} poster`} />
@@ -16,8 +22,14 @@ export default function WatchedMovieCard({ movie }: { movie: Movie }) {
         </p>
         <p>
           <span>⏳</span>
-          <span>{movie.Runtime} min</span>
+          <span>{movie.Runtime}</span>
         </p>
+        <button
+          className='btn-delete'
+          onClick={() => deleteWatched(movie.imdbID)}
+        >
+          X
+        </button>
       </div>
     </li>
   );

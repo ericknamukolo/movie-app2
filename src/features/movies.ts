@@ -3,9 +3,11 @@ import Movie from '../models/movie';
 const APIKEY = '74399d7d';
 
 async function searchMovie(query: string): Promise<Movie[]> {
+  const controller = new AbortController();
   try {
     const res: Response = await fetch(
-      `http://www.omdbapi.com/?s=${query}&apiKey=${APIKEY}`
+      `http://www.omdbapi.com/?s=${query}&apiKey=${APIKEY}`,
+      { signal: controller.signal }
     );
     const data = await res.json();
 
