@@ -11,10 +11,10 @@ import Box from './components/movie/movies/box';
 import WatchedSummary from './components/movie/watched/watched-summary';
 import WatchedList from './components/movie/watched/watched-list';
 
-import searchMovie from './features/movies';
 import Loader from './components/loader';
 import SelectedMovie from './components/movie/selected-movie';
 import { useMovies } from './hooks/use-movies';
+import { useLocalStorage } from './hooks/use-local-storage';
 
 export default function App() {
   const [watched, setWatched] = useState<Movie[]>(() => {
@@ -23,10 +23,6 @@ export default function App() {
   const [query, setQuery] = useState('');
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const { movies, loading } = useMovies({ query });
-
-  useEffect(() => {
-    localStorage.setItem('watched', JSON.stringify(watched));
-  }, [watched]);
 
   function addWatchedMovie(movie: Movie) {
     setWatched((watched) => {
@@ -44,6 +40,8 @@ export default function App() {
       return newMovies;
     });
   }
+
+  useLocalStorage({ movies: watched });
   return (
     <>
       <NavBar>
