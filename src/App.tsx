@@ -14,27 +14,15 @@ import WatchedList from './components/movie/watched/watched-list';
 import searchMovie from './features/movies';
 import Loader from './components/loader';
 import SelectedMovie from './components/movie/selected-movie';
+import { useMovies } from './hooks/use-movies';
 
 export default function App() {
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
   const [watched, setWatched] = useState<Movie[]>(() => {
     return JSON.parse(localStorage.getItem('watched') || '[]');
   });
   const [query, setQuery] = useState('');
   const [selectedId, setSelectedId] = useState<string | null>(null);
-
-  useEffect(() => {
-    if (query.length < 3) {
-      return;
-    }
-    searchMovie(query)
-      .then((val) => {
-        setMovies(val);
-      })
-      .catch((e) => alert(e))
-      .finally(() => setLoading(false));
-  }, [query]);
+  const { movies, loading } = useMovies({ query });
 
   useEffect(() => {
     localStorage.setItem('watched', JSON.stringify(watched));
